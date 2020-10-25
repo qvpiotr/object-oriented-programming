@@ -1,12 +1,12 @@
-package agh.cs.lab2;
+package main.agh.cs.lab2;
 
 import java.util.Map;
 
 public enum MapDirection {
     NORTH,
+    EAST,
     SOUTH,
-    WEST,
-    EAST;
+    WEST;
 
     public String toString(){
         switch(this) {
