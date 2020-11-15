@@ -11,19 +11,19 @@ public class SimulationEngine implements IEngine {
 
     public MoveDirection[] moves;
     public Vector2d[] animalsPos;
-    public GrassField map;
+    public AbstractWorldMap map;
 
 
-    public SimulationEngine(MoveDirection[] moves, IWorldMap map, Vector2d[] animalsPos){
+    public SimulationEngine(MoveDirection[] moves, AbstractWorldMap map, Vector2d[] animalsPos){
         this.moves = moves;
         this.animalsPos = animalsPos;
-        this.map = (GrassField) map;
+        this.map = map;
         for(Vector2d pos : animalsPos) {
-            ((GrassField) map).animals.add(new Animal(map, pos));
+            map.animals.add(new Animal(map, pos));
         }
     }
 
-    public GrassField getMap() {
+    public AbstractWorldMap getMap() {
         return map;
     }
 

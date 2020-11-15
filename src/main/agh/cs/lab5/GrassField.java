@@ -2,20 +2,16 @@ package main.agh.cs.lab5;
 
 import main.agh.cs.lab2.Vector2d;
 import main.agh.cs.lab4.Animal;
-import main.agh.cs.lab4.IWorldMap;
-import main.agh.cs.lab4.MapVisualizer;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GrassField implements IWorldMap {
-    private int number;
+public class GrassField extends AbstractWorldMap {
     public List<Grass> grassPos = new ArrayList<>();
-    public List<Animal> animals = new ArrayList<>();
 
     public GrassField(int number) {
-        this.number = number;
         Random r = new Random();
         for (int i =0; i<number; i++){
             int x = r.nextInt((int) (Math.sqrt(number*10)+1));
@@ -28,7 +24,8 @@ public class GrassField implements IWorldMap {
         }
     }
 
-    private Vector2d upperR(){
+    @Override
+    public Vector2d upperR(){
         Vector2d uR = animals.get(0).getPosition();
         for (Animal animal : animals){
             uR = uR.upperRight(animal.getPosition());
@@ -41,7 +38,8 @@ public class GrassField implements IWorldMap {
 
     }
 
-    private Vector2d lowerL(){
+    @Override
+    public Vector2d lowerL(){
         Vector2d lL = animals.get(0).getPosition();
         for (Animal animal : animals){
             lL = lL.lowerLeft(animal.getPosition());
@@ -52,24 +50,12 @@ public class GrassField implements IWorldMap {
         return lL;
     }
 
-    public String toString() {
-        MapVisualizer mapvisualizer = new MapVisualizer(this);
-        return mapvisualizer.draw(lowerL(),upperR());
-    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
         return !(objectAt(position) instanceof Animal);
     }
 
-    @Override
-    public boolean place(Animal animal) {
-        if (this.isOccupied(animal.getPosition()))
-            return false;
-        animals.add(animal);
-        return true;
-
-    }
 
     @Override
     public boolean isOccupied(Vector2d position) {
