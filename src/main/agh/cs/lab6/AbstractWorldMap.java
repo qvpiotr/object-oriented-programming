@@ -39,6 +39,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         if (this.isOccupied(animal.getPosition()))
             return false;
         animals.put(animal.getPosition(),animal);
+        animal.addObserver(this);
         return true;
 
     }
