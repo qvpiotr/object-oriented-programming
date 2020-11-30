@@ -62,10 +62,12 @@ public class Animal {
             case FORWARD:
                 if(this.map.canMoveTo(this.position.add(Objects.requireNonNull(this.animalDirection.toUnitVector()))))
                     this.position = this.position.add(Objects.requireNonNull(this.animalDirection.toUnitVector()));
+                    positionChanged(prev,position);
                 break;
             case BACKWARD:
                 if(this.map.canMoveTo(this.position.substract(Objects.requireNonNull(this.animalDirection.toUnitVector()))))
                     this.position = this.position.substract(Objects.requireNonNull(this.animalDirection.toUnitVector()));
+                    positionChanged(prev,position);
                 break;
         }
     }
